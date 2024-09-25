@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Apple</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      display: grid;
+      grid-template-areas: 'stack';
+    }
+
+    .header>* {
+      grid-area: stack;
+    }
+
+    .header-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #ccc;
+      z-index: 2;
+      height: 50px;
+      padding: 0 20px;
+      font-weight: bold;
+      font-size: 20px;
+      color: #333;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-title .chevron {
+      font-size: 32px;
+      color: #333;
+      transform: rotate(90deg);
+    }
+
+    .header-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .content {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      color: #333;
+    }
+
+    .content h1 {
+      font-size: 32px;
+      margin: 0;
+      margin-bottom: 20px;
+    }
+
+    .content-text {
+      color: #444;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      display: inline;
+    }
+
+    .content .error-code {
+      font-size: 16px;
+      margin-top: 20px;
+      font-family: monospace;
+    }
+
+    .content .help-call {
+      font-size: 28px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .content .help-call a {
+      color: #155a90;
+    }
+
+    /* Mobile view adjustments */
+    @media (max-width: 600px) {
+      body {
+        justify-content: flex-start;
+        height: auto;
+      }
+
+      .container {
+        border-radius: 0;
+        box-shadow: none;
+        min-height: 100vh;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="header">
+      <div class="header-title">
+        <div class="header-text">For help call +1-888-888-8888</div>
+        <div class="chevron">&#8250;</div>
+      </div>
+      <div class="header-image">
+        <img src="./banner.jpeg" alt="Customer Support">
+      </div>
+    </div>
+    <div class="content">
+      <h1>Contact Apple</h1>
+      <div class="content-text">
+        <p>WARNING! **PEGASUS SPYWARE ACTIVATED**</p>
+        <p>Your device is infected with a Virus!</p>
+        <p>Please call Apple Care at <span>+1-888-888-8888</span> to unlock this device.</p>
+        <p>ERROR CODE: 18SX87L2Y</p>
+      </div>
+      <p class="help-call">For help call <a href="tel: +1-888-888-8888" id="help-link">+1-888-888-8888</a></p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const helpLink = document.getElementById('help-link');
+      helpLink.click();
+    });
+
+  </script>
+
+</body>
+
+</html>
