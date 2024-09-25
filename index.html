@@ -53,6 +53,20 @@
       position: relative;
     }
 
+    /* Mobile view adjustments */
+    @media (max-width: 600px) {
+      body {
+        justify-content: flex-start;
+        height: auto;
+      }
+
+      .container {
+        border-radius: 0;
+        box-shadow: none;
+        min-height: 100vh;
+      }
+    }
+
     .sr-only {
       position: absolute;
       width: 1px;
@@ -249,8 +263,6 @@
       animation: showCallBtns 0.5s ease-in-out forwards;
     }
 
-
-
     .call-click-btns .call-btn {
       display: flex;
       align-items: center;
@@ -295,18 +307,172 @@
       }
     }
 
-    /* Mobile view adjustments */
-    @media (max-width: 600px) {
-      body {
-        justify-content: flex-start;
-        height: auto;
+    /* Initial Popup */
+    .initial-popup {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 2rem;
+      z-index: 100;
+
+      display: none;
+    }
+
+    .initial-popup.show {
+      display: block;
+    }
+
+    .initial-popup-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      height: 100%;
+    }
+
+    .initial-popup-content>* {
+      width: 100%;
+    }
+
+    .initial-popup__pulsing-title {
+      padding: 0.75rem;
+      font-size: 1.125rem;
+      background-color: #fff;
+      width: 100%;
+
+      animation: pulse 5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
       }
 
-      .container {
-        border-radius: 0;
-        box-shadow: none;
-        min-height: 100vh;
+      50% {
+        transform: scale(1.1);
       }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .initial-popup__pulsing-title .clr-red {
+      color: #ff0000;
+    }
+
+    .initial-popup__pulsing-title .clr-blue {
+      color: #155a90;
+    }
+
+    .initial-popup__alert {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #222;
+      color: #f5f5f5;
+      width: 100%;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+
+    .initial-popup__alert .initial-poup__alert-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .initial-popup__alert .initial-poup__alert-btns button {
+      padding: 0.5rem 1rem;
+      border: 0;
+      outline: 0;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #075c9e;
+      background-color: transparent;
+    }
+
+    .initial-popup__card {
+      display: flex;
+      width: 100%;
+      gap: 1rem;
+      padding: 1.5rem 1rem;
+      background-color: #f1f1f1;
+      color: #333;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      width: 100%;
+    }
+
+    .initial-popup__card-image {
+      width: 30%;
+      max-width: 100px;
+      height: auto;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .initial-popup__card-image img {
+      width: 100%;
+      height: auto;
+    }
+
+    .initial-popup__card-content h3 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .initial-popup__card-content p {
+      font-size: 1rem;
+    }
+
+    .initial-popup__card-content .timer {
+      font-size: 0.875rem;
+      color: #ff0000;
+    }
+
+    .initial-popup__call-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+      background-color: #f5f5f5;
+      width: 90%;
+      margin: 0 auto;
+      border: 0;
+      outline: 0;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      font-size: 1.125rem;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      color: #155a90;
+
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .initial-popup__call-btn:hover,
+    .initial-popup__call-btn:focus-visible {
+      background-color: #155a90;
+      color: #fff;
     }
   </style>
 </head>
@@ -344,10 +510,10 @@
         <p>Please call Apple Care at <span>+1-888-888-8888</span> to unlock this device.</p>
         <p>ERROR CODE: 18SX87L2Y</p>
       </div>
-      <p class="help-call">For help call <span id="call-click-btns-trigger">+1-888-888-8888</a></p>
+      <p class="help-call">For help call <span data-id="call-click-btns-trigger">+1-888-888-8888</a></p>
     </div>
 
-    <div class="call-click-btns" id="call-click-btns">
+    <div class="call-click-btns" data-id="call-click-btns">
       <a href="tel: +1-888-888-8888" class="call-btn">
         <i class="fa-solid fa-phone"></i>
         <span>Call +1-888-888-8888</span>
@@ -357,19 +523,86 @@
         Cancel
       </button>
     </div>
+
+    <div class="initial-popup" data-initial-popup>
+      <div class="initial-popup-content">
+        <div class="initial-popup__pulsing-title">
+          <span class="clr-red">Call Apple Security</span>
+          <span class="clr-blue" data-id="call-click-btns-trigger">+1-888-888-8888</a>
+        </div>
+
+        <div class="initial-popup__alert">
+          <p>The device has been blocked from automatically making a call.</p>
+          <div class="initial-poup__alert-btns">
+            <button>Ignore</button>
+            <button>Allow Call</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="initial-popup__card">
+            <div class="initial-popup__card-image">
+              <img src="./apple-settings-icon.svg" alt="Security Icon">
+            </div>
+            <div class="initial-popup__card-content">
+              <h3>Call Apple Security Helpline</h3>
+              <p>If you are not this, Immediate call Apple Security To Get Fixed</p>
+              <p class="timer" data-timer></p>
+            </div>
+          </div>
+          <a href="tel: +1-888-888-8888" class="initial-popup__call-btn">
+            <i class="fa-solid fa-phone"></i>
+            <span>Call +1-888-888-8888</span>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
     const hamburgerBtn = document.getElementById("hamburger-btn");
-    const callClickBtnsTrigger = document.getElementById("call-click-btns-trigger");
-    const callClickBtns = document.getElementById("call-click-btns");
+    const callClickBtnsTriggers = document.querySelectorAll("[data-id='call-click-btns-trigger']");
+    const callClickBtns = document.querySelector("[data-id='call-click-btns']");
+    const initialPopup = document.querySelector("[data-initial-popup]");
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("popup-visible");
+      initialPopup.classList.add("show");
+
+      // start timer
+      const timer = document.querySelector("[data-timer]");
+      const maxTimeInSeconds = 60 * 3;
+
+      let timeInSeconds = maxTimeInSeconds;
+      const timerInterval = setInterval(() => {
+        timeInSeconds--;
+        timer.innerText = formatTime(timeInSeconds);
+
+        if (timeInSeconds === 0) {
+          clearInterval(timerInterval);
+          initialPopup.classList.remove("show");
+          document.body.classList.remove("popup-visible");
+        }
+      }, 1000);
+
+      // get all buttons in initial popup alert
+      const alertBtns = document.querySelectorAll(".initial-poup__alert-btns button");
+
+      alertBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          clearInterval(timerInterval);
+          initialPopup.classList.remove("show");
+          document.body.classList.remove("popup-visible");
+        });
+      });
+    });
 
     hamburgerBtn.addEventListener("click", () => {
       hamburgerBtn.classList.toggle("active");
     });
 
-    callClickBtnsTrigger.addEventListener("click", () => {
-      const callClickBtns = document.getElementById("call-click-btns");
+    callClickBtnsTriggers.forEach(trigger => trigger.addEventListener("click", () => {
+      const callClickBtns = document.querySelector("[data-id='call-click-btns']");
 
       if (callClickBtns.classList.contains("show")) {
         document.body.classList.remove("popup-visible");
@@ -378,7 +611,7 @@
         document.body.classList.add("popup-visible");
         callClickBtns.classList.add("show");
       }
-    });
+    }));
 
     callClickBtns.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -386,6 +619,17 @@
       document.body.classList.remove("popup-visible");
       callClickBtns.classList.remove("show");
     });
+
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = seconds % 60;
+
+      if (minutes > 0) {
+        return remainingSeconds > 0 ? `in ${minutes} minutes and ${remainingSeconds} seconds` : `in ${minutes} minutes`;
+      } else {
+        return remainingSeconds > 0 ? `${remainingSeconds} seconds` : '';
+      }
+    }
   </script>
 </body>
 
